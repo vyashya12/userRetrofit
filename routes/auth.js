@@ -56,6 +56,26 @@ router.post("/login", (req, res) => {
   })
 })
 
+router.put("/", async (req, res) => {
+  const { fullname, password, nric } = req.body
+  try {
+    let user = await User.findOne({ nric })
+    let user1 = await User.findOne({ fullname })
+    if (!user1) {
+      user.fullname = fullname
+      let salt = bcrypt.genSaltSync(10)
+      let hash = bcrypt.hashSync(password, salt)
+      user.password = hash
+      user.save()
+      return res.json({ message: "User updated successfully" })
+    } else {
+      return res.json({ message: "User Fullname already exists" })
+    }
+  } catch (err) {
+    return res.json(err)
+  }
+})
+
 router.get("/", (req, res) => {
   const { nric } = req.body
   User.findOne({ nric }, (err, user) => {
