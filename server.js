@@ -11,7 +11,9 @@ app.use(express.json())
 
 app.use(express.urlencoded({ extended: true }))
 
-mongoose.connect(`mongodb://${DB_HOST}:${DB_PORT}/${DB_NAME}`)
+mongoose.connect(
+  `mongodb+srv://vyashya12:vyashya12@user.0nkynvg.mongodb.net/test`
+)
 mongoose.connection.once("open", () => console.log("Connected to DB"))
 
 app.use("/auth", require("./routes/auth"))
