@@ -37,11 +37,11 @@ router.post("/register", (req, res) => {
 })
 
 router.post("/login", (req, res) => {
-  const { fullname, password } = req.body
-  if (!fullname || !password) {
+  const { nric, password } = req.body
+  if (!nric || !password) {
     return res.json({ message: "Cannot have empty fields" })
   }
-  User.findOne({ fullname }, (err, user) => {
+  User.findOne({ nric }, (err, user) => {
     if (!user) return res.status(400).json({ message: "User does not exist" })
     if (err) return res.status(400).json({ err })
 
