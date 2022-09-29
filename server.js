@@ -17,5 +17,6 @@ mongoose.connect(
 mongoose.connection.once("open", () => console.log("Connected to DB"))
 
 app.use("/auth", require("./routes/auth"))
+app.use("/history", require("./routes/history"))
 
 app.listen(process.env.PORT, () => console.log(`Server is running in ${PORT}`))
