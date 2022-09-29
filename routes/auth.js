@@ -20,7 +20,7 @@ router.post("/register", (req, res) => {
     res.json({ message: "Your password should contain a symbol" })
     return
   }
-  User.findOne({ fullname: fullname }, (err, user) => {
+  User.findOne({ nric: nric }, (err, user) => {
     if (user) {
       return res.status(400).send({ message: "User already exists" })
     } else {
